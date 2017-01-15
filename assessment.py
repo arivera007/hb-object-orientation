@@ -84,7 +84,7 @@ class Exam(object):
       return (float(score) / len(self.questions)) * 100  # Total of right answers / total number of questions in percentage format.
 
 
-def Quiz(Exam):
+class Quiz(Exam):
    
    def administer(self):             # Inheriting from Exam, but overriding administer(). Otherwise behaves the same.
       return True if super(Quiz, self).administer() > 50 else False     # Quiz returns T or F if score >50 %. Exam does the scoring.
@@ -115,12 +115,37 @@ def example():
    take_test(exam, student)
 
 
+def quiz_example():
+   """ Sample Student and Exam instances to test the classes """
+   
+   # Creating quiz an questions to add to the exam.
+   quiz = Quiz("Feeling checkup")
+   q1 = Question("How are you feeling ? (good/bad)", "good")
+   q2 = Question("Are you happy ? (yes/no)", "yes")
+   q3 = Question("Do you feel lonely ? (yes/no)", "no")
+   quiz.add_question(q1)
+   quiz.add_question(q2)
+   quiz.add_question(q3)
+   
+   # Creating Student and administering the test
+   student = Student("Angelina", "Jolie", "Hollywood, CA")
+   
+   student.update_score(quiz.administer())
+   result = 'PASSED' if student.score else 'FAILED'                     # if student got a False then test Failed.
+   print 'Hello %s, you %s the test' % (student.first_name, result)
+
+
 
 ###############################################################################
-# TESTING: Running the example.
+# TESTING: Running the example. (Or quiz if uncommented)
 
 if __name__ == "__main__":
    
-   example()
+   example()            # Runs the Exam example
+   
+   # In case my solution for Quiz class needs to be tested. Instructions didn't ask for that so I have it commented, but it runs.
+   # quiz_example()
+   
+   
    
    
