@@ -32,7 +32,10 @@ class Student(object):
       self.first_name = first_name
       self.last_name = last_name
       self.address = address
+      self.score = 0
       
+   def update_score(self, score):
+      self.score = score
    
 class Question(object):
    
@@ -60,8 +63,40 @@ class Exam(object):
    def administer(self):
       score = 0
       for question in self.questions:
-         question.ask_and_evaluate()
-         score += 1
-      return "Your score is: %.2f", float(score) / len(self.questions)
+         if question.ask_and_evaluate():
+            score += 1
+      return (float(score) / len(self.questions)) * 100
 
 
+def take_test(exam, student):
+   """ Function for an specific student to take an specific exam. Score at screen"""
+   
+   student.update_score(exam.administer())
+   print 'Hello %s, you had a score of %.2f %%' % (student.first_name, student.score)
+
+   
+def example():
+   """ Sample Student and Exam instances to test the classes """
+   
+   # Creating exam an questions to add to the exam.
+   exam = Exam("Feeling checkup")
+   q1 = Question("How are you feeling ? (good/bad)", "good")
+   q2 = Question("Are you happy ? (yes/no)", "yes")
+   q3 = Question("Do you feel lonely ? (yes/no)", "no")
+   exam.add_question(q1)
+   exam.add_question(q2)
+   exam.add_question(q3)
+   
+   # Creating Student and administering the test
+   student = Student("Angelina", "Jolie", "Hollywood, CA")
+   
+   take_test(exam, student)
+
+
+
+###############################################################################
+# TESTING: Running the example.
+
+if __name__ == "__main__":
+   
+   example()
