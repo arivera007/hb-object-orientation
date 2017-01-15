@@ -38,8 +38,15 @@ class Question(object):
    
    def __init__(question, correct_answer):
       self.question = question
-      self.question = question
+      self.correct_answer = correct_answer
       
+   def ask_and_evaluate():
+      answer = raw_input(self.question+' >>> ')
+      return True if answer == self.correct_answer else False
+      # if answer == self.correct_answer:
+      #    return True
+      # else:
+      #    return False
       
 class Exam(object):
    
@@ -47,5 +54,14 @@ class Exam(object):
       self.name = name
       self.questions = []
       
+   def add_question(question):
+      self.questions.append(question)
+      
+   def administer():
+      score = 0
+      for question in questions:
+         question.ask_and_evaluate()
+         score += 1
+      return "Your score is: %.2f", float(score) / len(questions)
 
 
