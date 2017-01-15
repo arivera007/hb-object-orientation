@@ -27,6 +27,7 @@ Part 1: Discussion
 # Create your classes and class methods
 
 class Student(object):
+   """ Class that handles the student information including score """
    
    def __init__(self, first_name, last_name, address):
       self.first_name = first_name
@@ -36,22 +37,22 @@ class Student(object):
       
    def update_score(self, score):
       self.score = score
+
    
 class Question(object):
+   """ Class with question-answer pair that can ba added to an Exam class. Self-evaluate."""
    
    def __init__(self, question, correct_answer):
       self.question = question
       self.correct_answer = correct_answer
       
    def ask_and_evaluate(self):
-      answer = raw_input(self.question+' >>> ')
-      return True if answer == self.correct_answer else False
-      # if answer == self.correct_answer:
-      #    return True
-      # else:
-      #    return False
-      
+      answer = raw_input(self.question + ' >>> ')                 # Ask user this instance question.
+      return True if answer == self.correct_answer else False     # Evaluate result and return it.
+
+
 class Exam(object):
+   """ Class that contains a list of Questions. Administering and scoring capabilities """
    
    def __init__(self,name):
       self.name = name
@@ -63,9 +64,15 @@ class Exam(object):
    def administer(self):
       score = 0
       for question in self.questions:
-         if question.ask_and_evaluate():
+         if question.ask_and_evaluate():                 # If anser was right add 1 to the score
             score += 1
-      return (float(score) / len(self.questions)) * 100
+      return (float(score) / len(self.questions)) * 100  # Total of right answers / total number of questions in percentage format.
+
+
+def Quiz(Exam):
+   
+   def administer(self):             # Inheriting from Exam, but overriding administer(). Otherwise behaves the same.
+      return True if super(Quiz, self).administer() > 50 else False     # Quiz returns T or F instead of a score. Exam does the scoring.
 
 
 def take_test(exam, student):
