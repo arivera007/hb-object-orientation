@@ -28,7 +28,7 @@ Part 1: Discussion
 
 class Student(object):
    
-   def __init__(first_name, last_name, address):
+   def __init__(self, first_name, last_name, address):
       self.first_name = first_name
       self.last_name = last_name
       self.address = address
@@ -36,11 +36,11 @@ class Student(object):
    
 class Question(object):
    
-   def __init__(question, correct_answer):
+   def __init__(self, question, correct_answer):
       self.question = question
       self.correct_answer = correct_answer
       
-   def ask_and_evaluate():
+   def ask_and_evaluate(self):
       answer = raw_input(self.question+' >>> ')
       return True if answer == self.correct_answer else False
       # if answer == self.correct_answer:
@@ -50,18 +50,18 @@ class Question(object):
       
 class Exam(object):
    
-   def __init__(name):
+   def __init__(self,name):
       self.name = name
       self.questions = []
       
-   def add_question(question):
+   def add_question(self, question):
       self.questions.append(question)
       
-   def administer():
+   def administer(self):
       score = 0
-      for question in questions:
+      for question in self.questions:
          question.ask_and_evaluate()
          score += 1
-      return "Your score is: %.2f", float(score) / len(questions)
+      return "Your score is: %.2f", float(score) / len(self.questions)
 
 
